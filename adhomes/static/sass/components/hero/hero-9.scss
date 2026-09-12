@@ -1,0 +1,200 @@
+.hero.-type-9 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+
+  @include media-below(md) {
+    height: 80vh;
+  }
+
+  .hero {
+    &__slider {}
+
+    &__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+
+      @include media-below(md) {
+        height: 80vh;
+      }
+      
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(black, 0.5);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__nav {
+      position: absolute;
+      top: 50%;
+      left: 60px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+      transform: translateY(-50%);
+      z-index: 5;
+
+      @include media-below(lg) {
+        left: 40px;
+      }
+
+      @include media-below(md) {
+        left: 20px;
+      }
+      
+      @include media-below(sm) {
+        position: absolute;
+        flex-direction: row;
+        top: unset;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+      }
+
+      > * {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        padding: 0 32px;
+        background-color: transparent;
+        transition: all 0.2s $easeOutQuart;
+        opacity: 0.5;
+        
+        @include media-below(md) {
+          height: 50px;
+          padding: 0 16px;
+        }
+        
+        @include media-below(sm) {
+          height: 40px;
+          padding: 0 12px;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 1px;
+          background-color: white;
+          transition: all 0.2 $easeOutQuart;
+          opacity: 0;
+
+          @include media-below(sm) {
+            top: unset;
+            width: 100%;
+            height: 1px;
+          }
+        }
+
+        &.swiper-pagination-bullet-active {
+          opacity: 1;
+
+          &::before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    &__lines {
+      > * {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: rgba(white, 0.1);
+        z-index: 2;
+      }
+
+      > *:nth-child(1) { left: 60px; }
+      > *:nth-child(2) { right: 60px; }
+
+      @include media-below(lg) {
+        > *:nth-child(1) { left: 40px; }
+        > *:nth-child(2) { right: 40px; }
+      }
+
+      @include media-below(md) {
+        > *:nth-child(1) { left: 20px; }
+        > *:nth-child(2) { right: 20px; }
+      }
+
+      @include media-below(sm) {
+        > *:nth-child(1) { left: 15px; }
+        > *:nth-child(2) { right: 15px; }
+      }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      padding-top: 265px;
+      padding-bottom: 265px;
+
+      @include media-below(xl) {
+        padding-top: 240px;
+        padding-bottom: 180px;
+      }
+
+      @include media-below(sm) {
+        padding-top: 180px;
+        padding-bottom: 150px;
+      }
+    }
+
+    &__subtitle {
+      font-size: 18px;
+      line-height: 32px;
+      margin-bottom: 20px;
+
+      @include media-below(md) {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+    }
+
+    &__title {
+      font-size: 82px;
+      line-height: 1.2;
+      font-weight: 500;
+      text-transform: uppercase;
+      
+      @include media-below(lg) {
+        font-size: 64px;
+      }
+      
+      @include media-below(md) {
+        font-size: 52px;
+      }
+      
+      @include media-below(sm) {
+        font-size: 38px;
+      }
+    }
+
+    &__button {
+      margin-top: 20px;
+    }
+  }
+}

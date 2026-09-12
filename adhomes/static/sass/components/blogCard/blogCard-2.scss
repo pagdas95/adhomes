@@ -1,0 +1,39 @@
+.blogCard.-type-2 {
+  .blogCard {
+    &__image {
+      position: relative;
+      z-index: 0;
+    }
+
+    &__date {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 40px;
+      z-index: 1;
+
+      > *:nth-child(1) {
+        font-size: 62px;
+        font-weight: 500;
+        line-height: 76px;
+        letter-spacing: 2.5px;
+      }
+
+      > *:nth-child(2) {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 32px;
+      }
+    }
+
+    &__content {}
+
+    &__tag {}
+
+    &__title {}
+  }
+}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}Projects — A.D HOMESHELTER LTD{% endblock %}
+{% block meta_description %}Explore A.D Homeshelter's property developments across Larnaca, Cyprus — completed, under construction and upcoming.{% endblock %}
+
+{% block content %}
+
+    {# Page header #}
+    <section data-anim-wrap class="pageHeader -type-1">
+      <div data-anim-child="fade delay-1" class="pageHeader__image">
+        <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="image">
+      </div>
+
+      <div class="container">
+        <h1 data-anim-child="slide-up delay-1" class="pageHeader__title">PROJECTS</h1>
+
+        <div data-anim-child="slide-up delay-2" class="pageHeader-nav">
+          <div class="pageHeader-nav__link">
+            <a href="{% url 'developments:home' %}">Home</a>
+          </div>
+          <span>-</span>
+          <div class="pageHeader-nav__link">
+            <span>PROJECTS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Project grid #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row y-gap-60">
+
+          {% for project in projects %}
+          <div data-anim="slide-up delay-1" class="col-sm-6">
+            <a href="{{ project.get_absolute_url }}" class="imageCard -type-2 hover-btn-explore">
+              <div class="imageCard__image relative ratio ratio-69:50">
+                {% if project.main_image %}
+                  <img src="{{ project.main_image.url }}" alt="{{ project.main_image_alt|default:project.name }}" class="img-ratio">
+                {% else %}
+                  <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="{{ project.name }}" class="img-ratio">
+                {% endif %}
+
+                <div class="hover-btn-explore__item">
+                  <button class="button text-white bg-dark-1 size-120 fw-500 rounded-full">Explore</button>
+                </div>
+              </div>
+
+              <h3 class="imageCard__title text-dark-1">{{ project.name|upper }}</h3>
+              <p class="imageCard__text text-dark-1">
+                {{ project.get_status_display|upper }}{% if project.location %} • {{ project.location|upper }}{% endif %}
+              </p>
+            </a>
+          </div>
+          {% empty %}
+          <div class="col-12">
+            <p class="text-18">No projects are listed yet. Please check back soon.</p>
+          </div>
+          {% endfor %}
+
+        </div>
+
+        {# Pagination #}
+        {% if is_paginated %}
+        <div class="pagination -buttons justify-center mt-60 md:mt-20">
+          <div class="row x-gap-10 y-gap-10 items-center">
+            {% if page_obj.has_previous %}
+            <div class="col-auto">
+              <a href="?page={{ page_obj.previous_page_number }}" class="button -md -outline-dark-1 text-dark-1">
+                <i class="icon-left-arrow"></i>
+              </a>
+            </div>
+            {% endif %}
+
+            {% for num in paginator.page_range %}
+            <div class="col-auto">
+              {% if num == page_obj.number %}
+                <span class="button -md -dark-1 bg-accent-1 text-white">{{ num }}</span>
+              {% else %}
+                <a href="?page={{ num }}" class="button -md -outline-dark-1 text-dark-1">{{ num }}</a>
+              {% endif %}
+            </div>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <div class="col-auto">
+              <a href="?page={{ page_obj.next_page_number }}" class="button -md -outline-dark-1 text-dark-1">
+                <i class="icon-right-arrow"></i>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+{% endblock %}

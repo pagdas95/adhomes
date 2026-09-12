@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}{{ project.meta_title|default:project.name }} — A.D HOMESHELTER LTD{% endblock %}
+{% block meta_description %}{{ project.meta_description|default:project.short_description }}{% endblock %}
+
+{% block content %}
+
+    {# ============================ HERO ============================ #}
+    <section data-anim-wrap class="propSingleHero">
+      <div class="propSingleHero__bg">
+        {% if project.main_image %}
+          <img src="{{ project.main_image.url }}" alt="{{ project.main_image_alt|default:project.name }}">
+        {% else %}
+          <img src="{% static 'images/hero/hero-9/aradipou.jpg' %}" alt="{{ project.name }}">
+        {% endif %}
+      </div>
+
+      <div class="container">
+        <div class="row y-gap-30 justify-between">
+          <div class="col-xl-6 col-lg-7">
+            <h1 data-anim-child="slide-up delay-1" class="text-82 lg:text-55 md:text-40 text-white">
+              {{ project.name }}
+            </h1>
+          </div>
+
+          <div class="col-auto">
+            <a href="{% url 'developments:property_list' %}" data-anim-child="slide-up delay-2" class="arrowButton -type-1 text-18 text-white md:text-16">
+              <span class="flex-center rounded-full bg-white text-dark-1">
+                <i class="icon-top-right-arrow"></i>
+              </span>
+              SEE ALL PROPERTY
+            </a>
+          </div>
+        </div>
+
+        <div class="propSingleHero__button row justify-center">
+          <div data-anim-child="slide-up delay-3" class="col-auto">
+            <button class="button -dark-1 size-100 flex-center border-white text-white rounded-full">
+              <i class="icon-down-arrow text-20"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ========================= PROJECT BRIEF ====================== #}
+    <section class="layout-pt-lg">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-xl-10 col-lg-11">
+            <div class="row y-gap-15 justify-between">
+              <div class="col-auto">
+                <h3 class="text-20 md:text-18 uppercase fw-500">Project Brief</h3>
+              </div>
+
+              <div class="col-xl-7 col-lg-8">
+                <p class="text-18 md:text-16">{{ project.description|linebreaksbr }}</p>
+
+                <div class="row y-gap-10 pt-60 md:pt-30">
+                  <div class="col-4">
+                    <div class="text-18 md:text-16 text-accent-1">Status</div>
+                    <div class="text-18 md:text-16 uppercase">{{ project.get_status_display }}</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="text-18 md:text-16 text-accent-1">Completion</div>
+                    <div class="text-18 md:text-16 uppercase">
+                      {% if project.completion_date %}{{ project.completion_date|date:"Y" }}{% elif project.expected_completion %}{{ project.expected_completion }}{% else %}TBA{% endif %}
+                    </div>
+                  </div>
+                  {% if project.brochure %}
+                  <div class="col-4">
+                    <a href="{{ project.brochure.url }}" download class="button -md -dark-1 bg-accent-1 text-white mt-15 col-12">
+                      Download brochure
+                    </a>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ========================= IMAGE GALLERY ====================== #}
+    {% if project.images.all %}
+    <section class="layout-pt-lg layout-pb-lg relative">
+      <div data-anim="slide-up delay-1" class="container">
+        <div class="relative js-section-slider" data-gap="30" data-slider-cols="xl-2 lg-2 md-2 sm-1 base-1">
+          <div class="swiper-wrapper">
+
+            {% for image in project.images.all %}
+            <div class="swiper-slide">
+              <div class="ratio ratio-69:65">
+                <img src="{{ image.image.url }}" alt="{{ image.alt_text|default:project.name }}" class="img-ratio">
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+
+          <div class="d-flex mt-60 md:mt-30">
+            <button class="button -outline-dark-1 size-80 rounded-full -prev text-dark-1 js-prev">
+              <i class="icon-left-arrow text-20"></i>
+            </button>
+            <button class="button -outline-dark-1 size-80 rounded-full -next text-dark-1 ml-20 js-next">
+              <i class="icon-right-arrow text-20"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {# ==================== CHOOSE AN APARTMENT (grid) ============== #}
+    {% if units %}
+    <section class="layout-pt-lg layout-pb-lg bg-dark-1 text-white">
+      <div data-anim-wrap class="container">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">CHOOSE AN</span><br>
+              APARTMENT
+            </h2>
+          </div>
+
+          <div class="col-xl-6">
+            <p class="">Explore the available units within {{ project.name }} — each designed around comfort, functionality and modern everyday living.</p>
+          </div>
+        </div>
+
+        <div class="row y-gap-30 mt-60 md:mt-40 sm:mt-20">
+
+          {% for unit in units %}
+          <div data-anim-child="slide-left delay-{{ forloop.counter }}" class="col-xl-4 col-md-6">
+            <a href="{{ unit.get_absolute_url }}" class="imageCard -type-2">
+              <div class="imageCard__image ratio ratio-45:40">
+                {% if unit.main_image %}
+                  <img src="{{ unit.main_image.url }}" alt="{{ unit.main_image_alt|default:unit.name }}" class="img-ratio">
+                {% else %}
+                  <img src="{% static 'images/imageSlider/2/doubleroom.png' %}" alt="{{ unit.name }}" class="img-ratio">
+                {% endif %}
+              </div>
+
+              <h3 class="imageCard__title text-white">
+                {% if unit.property_type %}{{ unit.property_type.name|upper }}{% else %}{{ unit.name|upper }}{% endif %}
+              </h3>
+              <p class="imageCard__text text-white">
+                {% if unit.internal_area %}FROM {{ unit.internal_area|floatformat:0 }} M2{% else %}{{ unit.get_status_display|upper }}{% endif %}
+              </p>
+            </a>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {# ==================== CHECK AVAILABILITY (table) ============== #}
+    {% if units %}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container overflow-hidden">
+        <div class="row justify-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">CHECK</span> AVAILABILITY
+            </h2>
+          </div>
+        </div>
+
+        <div class="row y-gap-30 pt-60 md:pt-30">
+          <div class="col-12">
+            <div data-anim="slide-left delay-1" class="table -type-1">
+              <table>
+                <thead>
+                  <tr>
+                    <td>RESIDENCE</td>
+                    <td>BED/BATH</td>
+                    <td>SQ.M.</td>
+                    <td>STATUS</td>
+                    <td>PRICE</td>
+                    <td>FLOOR PLAN</td>
+                  </tr>
+                </thead>
+
+                {% for unit in units %}
+                <tr>
+                  <td>{{ unit.name|upper }}</td>
+                  <td>{{ unit.bedrooms }}/{{ unit.bathrooms }}</td>
+                  <td>{% if unit.internal_area %}{{ unit.internal_area|floatformat:0 }}{% else %}—{% endif %}</td>
+                  <td>{{ unit.get_status_display|upper }}</td>
+                  <td>
+                    {% if unit.price_on_request %}On request
+                    {% elif unit.price %}€{{ unit.price|floatformat:0|intcomma }}
+                    {% else %}—{% endif %}
+                  </td>
+                  <td>
+                    {% if unit.floor_plan %}
+                      <a href="{{ unit.floor_plan.url }}" target="_blank" class="button -underline">VIEW NOW</a>
+                    {% else %}
+                      <span class="text-light-1">—</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {# ====================== BUILDING AMENITIES ==================== #}
+    {% if project.amenities.all %}
+    <section class="layout-pt-lg layout-pb-lg bg-accent-2">
+      <div data-anim-wrap class="container">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">BUILDING</span>
+              <br>
+              AMENITIES
+            </h2>
+          </div>
+
+          <div class="col-xl-6">
+            <p class="">The features and amenities that make {{ project.name }} a place to call home.</p>
+          </div>
+        </div>
+
+        <div class="row y-gap-30 pt-60 md:pt-30">
+
+          {% for amenity in project.amenities.all %}
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-{{ forloop.counter }}" class="bg-white px-40 py-40 md:px-30">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1">
+                <i class="{{ amenity.icon|default:'icon-building' }} text-40"></i>
+              </div>
+
+              <h3 class="text-20 mt-30">{{ amenity.name|upper }}</h3>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {# ======================= CONTACT (static) ==================== #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-lg-10">
+            <h2 class="text-center md:text-left text-62 md:text-38">
+              <div class="text-accent-1">HAVE A QUESTION?</div>
+              WE ARE GLAD TO CONSULT YOU!
+            </h2>
+          </div>
+        </div>
+
+        <div class="row justify-center pt-60 md:pt-30">
+          <div class="col-xl-6 col-lg-8 col-md-10">
+            <div class="contactForm">
+              <div class="contactForm__field">
+                <div class="contactForm__caption">Name</div>
+                <input type="text">
+              </div>
+
+              <div class="contactForm__field mt-30">
+                <div class="contactForm__caption">phone</div>
+                <input type="text">
+              </div>
+
+              <div class="contactForm__field mt-30">
+                <div class="contactForm__caption">email (optional)</div>
+                <input type="text">
+              </div>
+
+              <div class="mt-30">
+                <button class="button -md -dark-1 bg-accent-1 text-white col-12">
+                  SEND REQUEST
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

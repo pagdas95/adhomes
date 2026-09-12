@@ -1,0 +1,116 @@
+.footer.-type-2 {
+  position: relative;
+  padding-top: 120px;
+  z-index: 0;
+
+  @include media-below(lg) {
+    padding-top: 80px;
+  }
+
+  .footer {
+    &__logo {
+      img {
+        width: 200px;
+        
+        @include media-below(lg) {
+          width: 140px;
+        }
+      }
+    }
+
+    &__mainTitle {
+      font-size: 44px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 1.5px;
+      margin-bottom: 120px;
+      
+      @include media-below(lg) {
+        font-size: 42px;
+        margin-bottom: 40px;
+      }
+
+      @include media-below(sm) {
+        font-size: 32px;
+      }
+    }
+
+    &__title {}
+
+    &__list {
+      margin-top: 20px;
+
+      > * {
+        display: block;
+        font-size: 15px;
+
+        + * {
+          margin-top: 6px;
+        }
+      }
+    }
+
+    &__bottom {
+      padding-top: 120px;
+      padding-bottom: 60px;
+
+      @include media-below(md) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+    }
+  }
+
+  .footerForm {
+    margin-top: 30px;
+
+    &__title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.8;
+    }
+
+    &__input {
+      input {
+        font-size: 16px;
+        padding: 10px 0;
+        border-bottom: 1px solid black;
+      }
+    }
+
+    &__button {
+      width: 100%;
+      margin-top: 25px;
+    }
+  }
+
+  &.-dark {
+    .footer {
+      &__bg {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 55.4vw;
+        background-color: #15191F;
+        z-index: -1;
+
+        @include media-below(xl) {
+          width: 60vw;
+        }
+
+        @include media-below(lg) {
+          display: none;
+        }
+      }
+    }
+
+    .footerForm {
+      &__input {
+        input {
+          border-color: white;
+        }
+      }
+    }
+  }
+}

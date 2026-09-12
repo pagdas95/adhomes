@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("", include("adhomes.developments.urls")),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
@@ -19,7 +20,7 @@ urlpatterns = [
     path("users/", include("adhomes.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    # ...
+    
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]

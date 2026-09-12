@@ -1,0 +1,17 @@
+.imageCard.-type-2 {
+  .imageCard {
+    &__image {
+      margin-bottom: 30px;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 36px;
+    }
+
+    &__text {
+      line-height: 30px;
+    }
+  }
+}

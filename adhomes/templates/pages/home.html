@@ -1,3 +1,459 @@
 {% extends "base.html" %}
+{% load static %}
 
+{% block title %}A.D HOMESHELTER LTD — Property Development in Larnaca, Cyprus{% endblock %}
 
+{% block content %}
+
+    {# ============================================================= #}
+    {# SECTION 1 — HERO SLIDER (admin picks up to 5 projects)        #}
+    {# ============================================================= #}
+    <section class="hero -type-9 bg-dark-1 js-hero-type-9">
+      <div class="hero__slider js-slider">
+        <div class="swiper-wrapper">
+
+          {% for project in hero_projects %}
+          <div class="swiper-slide">
+            <div class="container">
+              <div class="row justify-center">
+                <div class="col-sm-10">
+                  <div class="hero__content">
+                    <div class="hero__bg">
+                      {% if project.main_image %}
+                        <img src="{{ project.main_image.url }}" alt="{{ project.main_image_alt|default:project.name }}">
+                      {% else %}
+                        <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="{{ project.name }}">
+                      {% endif %}
+                    </div>
+
+                    <div class="hero__subtitle">
+                      {{ project.location }}{% if project.location and project.get_status_display %} • {% endif %}{{ project.get_status_display|upper }}
+                    </div>
+
+                    <h1 class="hero__title">
+                      {{ project.name }}
+                    </h1>
+
+                    <div class="d-flex">
+                      <a href="{{ project.get_absolute_url }}" class="hero__button button -md -accent-1 bg-white text-dark-1">VIEW PROJECT</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          {# Fallback slide so the hero is never empty before data is added #}
+          <div class="swiper-slide">
+            <div class="container">
+              <div class="row justify-center">
+                <div class="col-sm-10">
+                  <div class="hero__content">
+                    <div class="hero__bg">
+                      <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="image">
+                    </div>
+                    <div class="hero__subtitle">LIVADIA, LARNACA • UNDER CONSTRUCTION</div>
+                    <h1 class="hero__title">Modern Living<br class="md:d-none"> In Livadia</h1>
+                    <div class="d-flex">
+                      <a href="#" class="hero__button button -md -accent-1 bg-white text-dark-1">VIEW PROJECT</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <div class="hero__nav js-nav">
+        {% for project in hero_projects %}
+          <div>{{ forloop.counter|stringformat:"02d" }}</div>
+        {% empty %}
+          <div>01</div>
+        {% endfor %}
+      </div>
+
+      <div class="hero__lines">
+        <div></div>
+        <div></div>
+      </div>
+    </section>
+
+    {# ============================================================= #}
+    {# STATIC — Building Homes / About intro                         #}
+    {# ============================================================= #}
+    <section class="layout-pt-lg">
+      <div class="container">
+        <div class="row y-gap-30 justify-between items-center">
+          <div class="col-lg-6">
+            <div class="imageGrid -type-1">
+              <div class="imageGrid__images">
+                <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="image">
+                <img src="{% static 'images/hero/hero-9/aradipou.jpg' %}" alt="image">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-5 col-lg-6">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              Building Homes.<br>
+             <span class="text-accent-1">Creating Lasting Value.</span><br class="lg:d-none">
+            </h2>
+
+            <p class="text-18 md:text-16 mt-60 xl:mt-20">At A.D. Homeshelter, we create modern residences designed around the way people live today. Combining contemporary architecture, quality materials and thoughtful design, every development is built with attention to detail, comfort and long-term value. From carefully selected locations to functional interiors and high construction standards, our goal is simple: to create homes you can feel confident in — whether you're looking for your next home or a property investment in Cyprus.</p>
+
+            <div class="d-flex mt-60 xl:mt-30">
+              <a href="{% url 'about' %}" class="button -md -dark-1 bg-accent-1 text-white">
+                Discover Our Story
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# STATIC — Marquee #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="marquee js-marquee">
+        <div class="js-first">MODERN HOMES. EXCEPTIONAL LIVING.</div>
+        <div class="text-accent-1 js-second">BUILT FOR TODAY. DESIGNED FOR TOMORROW.</div>
+      </div>
+    </section>
+
+    {# ============================================================= #}
+    {# SECTION 2 — CHOOSE AN APARTMENT (admin picks up to 5 units)   #}
+    {# ============================================================= #}
+    <section class="layout-pt-lg layout-pb-lg bg-accent-2">
+      <div class="container">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">CHOOSE AN</span><br>
+              APARTMENT
+            </h2>
+          </div>
+
+          <div class="col-xl-6 md:d-none">
+            <p class="">Explore a selection of our available apartments across our developments in Larnaca — each designed around comfort, functionality and modern everyday living.</p>
+          </div>
+        </div>
+
+        <div class="relative mt-60 md:mt-40 sm:mt-20 js-section-slider" data-gap="30" data-slider-cols="xl-3 lg-3 md-2 sm-2 base-1">
+          <div class="swiper-wrapper">
+
+            {% for property in featured_properties %}
+            <div class="swiper-slide">
+              <a href="#" class="imageCard -type-2 hover-btn-explore">
+                <div class="imageCard__image relative ratio ratio-45:55">
+                  {% if property.main_image %}
+                    <img src="{{ property.main_image.url }}" alt="{{ property.main_image_alt|default:property.name }}" class="img-ratio">
+                  {% else %}
+                    <img src="{% static 'images/imageSlider/2/doubleroom.png' %}" alt="{{ property.name }}" class="img-ratio">
+                  {% endif %}
+
+                  <div class="hover-btn-explore__item">
+                    <button class="button text-white bg-dark-1 size-120 fw-500 rounded-full">Explore</button>
+                  </div>
+                </div>
+
+                <h3 class="imageCard__title">{% if property.property_type %}{{ property.property_type.name|upper }}{% else %}{{ property.name|upper }}{% endif %}</h3>
+                <p class="imageCard__text">{{ property.get_status_display|upper }}{% if property.project.location %} • {{ property.project.location|upper }}{% endif %}</p>
+              </a>
+            </div>
+            {% empty %}
+            <div class="swiper-slide">
+              <a href="#" class="imageCard -type-2 hover-btn-explore">
+                <div class="imageCard__image relative ratio ratio-45:55">
+                  <img src="{% static 'images/imageSlider/2/doubleroom.png' %}" alt="image" class="img-ratio">
+                  <div class="hover-btn-explore__item">
+                    <button class="button text-white bg-dark-1 size-120 fw-500 rounded-full">Explore</button>
+                  </div>
+                </div>
+                <h3 class="imageCard__title">2 BEDROOM APARTMENT</h3>
+                <p class="imageCard__text">AVAILABLE • LIVADIA</p>
+              </a>
+            </div>
+            {% endfor %}
+
+          </div>
+
+          <div class="d-flex mt-60 md:mt-30">
+            <button class="sliderNav -prev js-prev">
+              <i class="icon-left-arrow"></i>
+            </button>
+            <button class="sliderNav -next ml-20 js-next">
+              <i class="icon-right-arrow"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ============================================================= #}
+    {# STATIC — Our Services                                         #}
+    {# ============================================================= #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">OUR</span><br>
+              SERVICES
+            </h2>
+          </div>
+
+          <div class="col-xl-6">
+            <p class="">From concept to completion, we manage every stage of the property journey with a focus on quality, reliability and attention to detail. Our experience in development, construction and property sales allows us to create homes that deliver lasting value.</p>
+          </div>
+        </div>
+
+        <div data-anim-wrap class="row y-gap-30 pt-60 md:pt-30">
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-1" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-building text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">PROPERTY DEVELOPMENT</h3>
+              <p class="mt-10">We develop thoughtfully planned residential projects in carefully selected locations, combining modern living with long-term value.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-2" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-group text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">CONSTRUCTION</h3>
+              <p class="mt-10">Quality construction is at the heart of every project, with carefully selected materials, trusted professionals and attention to every detail.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-3" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-map text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">ARCHITECTURAL &amp; MODERN DESIGN</h3>
+              <p class="mt-10">We create contemporary, functional spaces designed around everyday living, comfort and timeless aesthetics.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-4" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-badge text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">PROPERTY SALES</h3>
+              <p class="mt-10">Our team guides you through the property-buying process, helping you find the home that best suits your lifestyle and requirements.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-5" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-like text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">INVESTMENT OPPORTUNITIES</h3>
+              <p class="mt-10">We help buyers discover carefully selected real estate opportunities with strong potential for long-term value in Cyprus.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-6" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-technological text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">AFTER-SALES SUPPORT</h3>
+              <p class="mt-10">Our relationship continues beyond the purchase, providing reliable support and assistance throughout the handover process and beyond.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {# ============================================================= #}
+    {# SECTION 3 — FEATURED PROJECTS (admin picks up to 5 projects)  #}
+    {# ============================================================= #}
+    <section class="testimonialsSection">
+      <div class="testimonialsSection__bg">
+        <div class="testimonialsSection__images js-section-slider-testimonials-images">
+          {% for project in featured_projects %}
+            {% if project.main_image %}
+              <img src="{{ project.main_image.url }}" alt="{{ project.main_image_alt|default:project.name }}">
+            {% else %}
+              <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="{{ project.name }}">
+            {% endif %}
+          {% empty %}
+            <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="image">
+            <img src="{% static 'images/hero/hero-9/aradipou.jpg' %}" alt="image">
+            <img src="{% static 'images/hero/hero-9/kiti.jpg' %}" alt="image">
+          {% endfor %}
+        </div>
+        <div class="bg-accent-2"></div>
+      </div>
+
+      <div class="container">
+        <div class="row justify-end">
+          <div class="col-xl-5 col-lg-6 col-md-7">
+            <div class="testimonialsSection__content layout-pt-lg layout-pb-lg">
+              <h2 class="text-62 md:text-38 uppercase fw-500">
+                <span class="text-accent-1">FEATURED</span><br>
+                PROJECTS
+              </h2>
+
+              <div class="relative overflow-hidden pt-30 js-section-slider-testimonials">
+                <div class="swiper-wrapper">
+
+                  {% for project in featured_projects %}
+                  <div class="swiper-slide">
+                    <h4 class="text-18 fw-500 uppercase mb-30">{{ project.name }}</h4>
+                    <p class="text-18 sm:text-16">{{ project.short_description }}</p>
+                    <div class="d-flex mt-30">
+                      <a href="{{ project.get_absolute_url }}" class="button -md -accent-1 bg-accent-1 text-white">
+                        VIEW PROJECT
+                      </a>
+                    </div>
+                  </div>
+                  {% empty %}
+                  <div class="swiper-slide">
+                    <h4 class="text-18 fw-500 uppercase mb-30">LIVADIA RESIDENCES</h4>
+                    <p class="text-18 sm:text-16">A contemporary residential development currently under construction in Livadia, offering modern apartments designed around comfort, functionality and everyday living.</p>
+                    <div class="d-flex mt-30">
+                      <a href="#" class="button -md -accent-1 bg-accent-1 text-white">VIEW PROJECT</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                </div>
+              </div>
+
+              <div class="d-flex mt-30">
+                <button class="sliderNav -prev -transparent js-section-slider-testimonials-prev">
+                  <i class="icon-left-arrow"></i>
+                </button>
+                <button class="sliderNav -next -transparent ml-20 js-section-slider-testimonials-next">
+                  <i class="icon-right-arrow"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ============================================================= #}
+    {# STATIC — Larnaca connected living (map places)                #}
+    {# ============================================================= #}
+    <section class="layout-pt-lg layout-pb-lg bg-dark-2">
+      <div class="container">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase text-white fw-500">
+              <span class="text-accent-1">LARNACA</span><br>
+              CONNECTED LIVING
+            </h2>
+          </div>
+
+          <div class="col-lg-6 text-white md:d-none">
+            <p>Our developments are positioned across key areas of Larnaca, offering convenient access to the city centre, airport, coastline, schools, healthcare, shopping and everyday amenities.</p>
+          </div>
+        </div>
+
+        <div class="mapPlaces pt-60 md:pt-60 js-mapPlaces">
+          <div class="row items-center">
+            <div class="col-lg-5">
+              <div class="y-gap-30">
+
+                <div class="mapPlacesCard isCardActive" data-map-card="volta">
+                  <div>
+                    <h4 class="mapPlacesCard__title text-white">LARNACA AIRPORT</h4>
+                    <div class="mapPlacesCard__caption text-white">EASY ACCESS TO INTERNATIONAL TRAVEL</div>
+                  </div>
+                  <img src="{% static 'images/tabs/1/airport.jpg' %}" alt="image" class="mapPlacesCard__image">
+                </div>
+
+                <div class="mapPlacesCard isCardActive" data-map-card="bistro">
+                  <div>
+                    <h4 class="mapPlacesCard__title text-white">COASTLINE &amp; BEACHES</h4>
+                    <div class="mapPlacesCard__caption text-white">CLOSE TO LARNACA'S SEAFRONT AND BEACH AREAS</div>
+                  </div>
+                  <img src="{% static 'images/tabs/1/beach.jpeg' %}" alt="image" class="mapPlacesCard__image">
+                </div>
+
+                <div class="mapPlacesCard isCardActive" data-map-card="clinic">
+                  <div>
+                    <h4 class="mapPlacesCard__title text-white">HEALTHCARE</h4>
+                    <div class="mapPlacesCard__caption text-white">CONVENIENT ACCESS TO HOSPITALS &amp; MEDICAL SERVICES</div>
+                  </div>
+                  <img src="{% static 'images/tabs/1/hostipal.jpg' %}" alt="image" class="mapPlacesCard__image">
+                </div>
+
+                <div class="mapPlacesCard isCardActive" data-map-card="edumy">
+                  <div>
+                    <h4 class="mapPlacesCard__title text-white">SCHOOLS &amp; EDUCATION</h4>
+                    <div class="mapPlacesCard__caption text-white">ACCESS TO SHOPPING, DINING &amp; EVERYDAY SERVICES</div>
+                  </div>
+                  <img src="{% static 'images/tabs/1/mall1.webp' %}" alt="image" class="mapPlacesCard__image">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-lg-7">
+              <div class="mapPlaces__map">
+                <img src="{% static 'images/tabs/2/map4.png' %}" alt="map">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ============================================================= #}
+    {# STATIC — Have a question / contact                            #}
+    {# ============================================================= #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-lg-10">
+            <h2 class="text-center md:text-left text-62 md:text-38">
+              <div class="text-accent-1">HAVE A QUESTION?</div>
+              WE ARE GLAD TO CONSULT YOU!
+            </h2>
+          </div>
+        </div>
+
+        <div class="row justify-center pt-60 md:pt-30">
+          <div class="col-xl-6 col-lg-8 col-md-10">
+            <div class="contactForm">
+              <div class="contactForm__field">
+                <div class="contactForm__caption">Name</div>
+                <input type="text">
+              </div>
+
+              <div class="contactForm__field mt-30">
+                <div class="contactForm__caption">phone</div>
+                <input type="text">
+              </div>
+
+              <div class="contactForm__field mt-30">
+                <div class="contactForm__caption">email (optional)</div>
+                <input type="text">
+              </div>
+
+              <div class="mt-30">
+                <button class="button -md -dark-1 bg-accent-1 text-white col-12">
+                  SEND REQUEST
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

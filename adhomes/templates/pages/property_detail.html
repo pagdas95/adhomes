@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}{{ property.meta_title|default:property.name }} — {{ property.project.name }}{% endblock %}
+{% block meta_description %}{{ property.meta_description|default:property.description|truncatechars:160 }}{% endblock %}
+
+{% block content %}
+
+    {# ============================ HERO ============================ #}
+    <section data-anim-wrap class="pageHeader -type-1">
+      <div data-anim-child="fade delay-1" class="pageHeader__image">
+        {% if property.main_image %}
+          <img src="{{ property.main_image.url }}" alt="{{ property.main_image_alt|default:property.name }}">
+        {% else %}
+          <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="{{ property.name }}">
+        {% endif %}
+      </div>
+
+      <div class="container">
+        <div class="row y-gap-30 justify-between items-end">
+          <div class="col-xl-8 col-lg-9">
+            <h1 data-anim-child="slide-up delay-1" class="pageHeader__title">
+              {{ property.name }} — {{ property.project.name }}
+            </h1>
+
+            <div data-anim-child="slide-up delay-2" class="pageHeader-nav">
+              <div class="pageHeader-nav__link">
+                <a href="{% url 'developments:home' %}">Home</a>
+              </div>
+              <span>-</span>
+              <div class="pageHeader-nav__link">
+                <a href="{% url 'developments:property_list' %}">Properties</a>
+              </div>
+              <span>-</span>
+              <div class="pageHeader-nav__link">
+                <span>{{ property.name }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <a href="{{ property.project.get_absolute_url }}" data-anim-child="slide-up delay-3" class="arrowButton -type-1 text-white text-18 md:text-16">
+              <span class="flex-center rounded-full bg-white text-dark-1">
+                <i class="icon-top-right-arrow"></i>
+              </span>
+              VIEW PROJECT
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ======================= INTRO + HIGHLIGHTS =================== #}
+    <section class="layout-pt-lg">
+      <div data-anim-wrap class="container">
+        <div class="row y-gap-30 items-center justify-between">
+          <div data-anim-child="slide-up delay-3" class="col-lg-6">
+            {% if property.main_image %}
+              <img src="{{ property.main_image.url }}" alt="{{ property.main_image_alt|default:property.name }}">
+            {% else %}
+              <img src="{% static 'images/imageSlider/2/luxury.png' %}" alt="{{ property.name }}">
+            {% endif %}
+          </div>
+
+          <div data-anim-child="slide-up delay-1" class="col-xl-5 col-lg-6">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              {% if property.property_type %}{{ property.property_type.name }}{% else %}{{ property.name }}{% endif %}
+              <br>
+              <span class="text-accent-1">{{ property.get_status_display }}</span>
+            </h2>
+
+            <ul class="mt-60 md:mt-20">
+              {% if property.bedrooms %}<li>{{ property.bedrooms }} bedroom{{ property.bedrooms|pluralize }}</li>{% endif %}
+              {% if property.bathrooms %}<li>{{ property.bathrooms }} bathroom{{ property.bathrooms|pluralize }}</li>{% endif %}
+              {% if property.balcony_area %}<li>Private balcony / veranda ({{ property.balcony_area|floatformat:0 }} m2)</li>{% endif %}
+              {% if property.project.location %}<li>Located in {{ property.project.location }}</li>{% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ========================= DESCRIPTION ======================== #}
+    {% if property.description %}
+    <section class="layout-pt-lg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="text-20 uppercase fw-500">About this property</h3>
+            <div class="mt-20">
+              <p>{{ property.description|linebreaksbr }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {# ========================= NUMBER CARDS ======================= #}
+    <section class="layout-pt-lg">
+      <div class="container">
+        <div class="row y-gap-30">
+
+          <div class="col-lg-3 col-6">
+            <div data-anim="slide-left delay-1" class="numberCard -type-1">
+              <div class="numberCard__number">{% if property.internal_area %}{{ property.internal_area|floatformat:0 }}{% else %}—{% endif %}</div>
+              <div class="numberCard__title">AREA M2</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <div data-anim="slide-left delay-1" class="numberCard -type-1">
+              <div class="numberCard__number">{{ property.floor|default:"—" }}</div>
+              <div class="numberCard__title">FLOOR</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <div data-anim="slide-left delay-1" class="numberCard -type-1">
+              <div class="numberCard__number">{{ property.bedrooms }}</div>
+              <div class="numberCard__title">BEDROOMS</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <div data-anim="slide-left delay-1" class="numberCard -type-1">
+              <div class="numberCard__number">{{ property.bathrooms }}</div>
+              <div class="numberCard__title">BATHROOMS</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {# ========================= IMAGE SLIDER ======================= #}
+    {% if property.images.all %}
+    <section class="layout-pt-lg layout-pb-lg relative">
+      <div data-anim="slide-up delay-1" class="container">
+        <div class="relative js-section-slider" data-gap="30" data-slider-cols="xl-2 lg-2 md-2 sm-1 base-1">
+          <div class="swiper-wrapper">
+
+            {% for image in property.images.all %}
+            <div class="swiper-slide">
+              <div class="ratio ratio-69:65">
+                <img src="{{ image.image.url }}" alt="{{ image.alt_text|default:property.name }}" class="img-ratio">
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+
+          <div class="d-flex mt-60 md:mt-30">
+            <button class="sliderNav -prev -transparent js-prev">
+              <i class="icon-left-arrow"></i>
+            </button>
+            <button class="sliderNav -next -transparent ml-20 js-next">
+              <i class="icon-right-arrow"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {# ========================= AMENITIES ========================== #}
+    {% if property.amenities.all %}
+    <section class="layout-pt-lg layout-pb-lg relative">
+      <div class="sectionBg -mx-60 bg-accent-2 z--1"></div>
+
+      <div class="container">
+        <div data-anim-wrap class="row y-gap-60">
+
+          {% for amenity in property.amenities.all %}
+          <div data-anim-child="slide-up delay-{{ forloop.counter }}" class="col-lg-3 col-md-6">
+            <div class="iconCard -type-2 -dark">
+              <div class="iconCard__content">
+                <i class="iconCard__icon text-accent-1 {{ amenity.icon|default:'icon-building' }}"></i>
+                <h3 class="iconCard__title text-dark-1">{{ amenity.name }}</h3>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {# ==================== FLOOR PLAN (no tabs) ==================== #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div data-anim-wrap class="container">
+        <div data-anim="slide-up delay-1" class="row y-gap-30 justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">Floor</span>
+              <br>
+              Plan
+            </h2>
+          </div>
+        </div>
+
+        <div data-anim="slide-up delay-2" class="row justify-between pt-60 md:pt-30">
+          <div class="col-xl-7">
+            {% if property.floor_plan %}
+              <img src="{{ property.floor_plan.url }}" alt="Floor plan for {{ property.name }}">
+            {% else %}
+              <img src="{% static 'images/tabs/2/map4.png' %}" alt="Floor plan">
+            {% endif %}
+          </div>
+
+          <div class="col-xl-4">
+            {% if property.description %}
+              <p class="mb-60 md:mb-30 md:mt-30">{{ property.description|truncatewords:40 }}</p>
+            {% endif %}
+
+            <div class="">
+              <div class="d-flex justify-between border-bottom-accent-2 pb-15 mb-15">
+                <div class="">BEDROOMS</div>
+                <div class="">{{ property.bedrooms }}</div>
+              </div>
+              <div class="d-flex justify-between border-bottom-accent-2 pb-15 mb-15">
+                <div class="">FLOOR</div>
+                <div class="">{{ property.floor|default:"—" }}</div>
+              </div>
+              <div class="d-flex justify-between border-bottom-accent-2 pb-15 mb-15">
+                <div class="">AREA M2</div>
+                <div class="">{% if property.internal_area %}{{ property.internal_area|floatformat:0 }}{% else %}—{% endif %}</div>
+              </div>
+              <div class="d-flex justify-between border-bottom-accent-2 pb-15 mb-15">
+                <div class="">PARKING</div>
+                <div class="">{{ property.parking_spaces }}</div>
+              </div>
+              <div class="d-flex justify-between">
+                <div class="">PRICE</div>
+                <div class="">
+                  {% if property.price_on_request %}On request
+                  {% elif property.price %}€{{ property.price|floatformat:0|intcomma }}
+                  {% else %}—{% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% if property.brochure %}
+            <a href="{{ property.brochure.url }}" download class="button -md -outline-dark-1 text-dark-1 mt-15 col-12">
+              DOWNLOAD BROCHURE
+            </a>
+            {% endif %}
+
+            <button class="button -md -dark-1 bg-accent-1 text-white mt-15 col-12 js-toggle-requestForm">
+              REQUEST A VIEWING
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

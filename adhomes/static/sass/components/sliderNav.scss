@@ -1,0 +1,30 @@
+.sliderNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--color-dark-1);
+  background-color: var(--color-accent-2);
+  border-radius: 100%;
+  font-size: 22px;
+
+  &:hover {
+    background-color: white;
+    border-color: var(--color-accent-1);
+  }
+
+  &.-prev {}
+
+  &.-next {}
+
+  &.-transparent {
+    border-color: var(--color-accent-1);
+    background-color: transparent;
+    
+    &:hover {
+      background-color: var(--color-accent-1);
+      color: white !important;
+    }
+  }
+}

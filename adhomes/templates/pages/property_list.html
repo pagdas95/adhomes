@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}Properties — A.D HOMESHELTER LTD{% endblock %}
+{% block meta_description %}Browse available apartments and properties across A.D Homeshelter's developments in Larnaca, Cyprus.{% endblock %}
+
+{% block content %}
+
+    {# Page header #}
+    <section data-anim-wrap class="pageHeader -type-1">
+      <div data-anim-child="fade delay-1" class="pageHeader__image">
+        <img src="{% static 'images/hero/hero-9/aradipou.jpg' %}" alt="image">
+      </div>
+
+      <div class="container">
+        <h1 data-anim-child="slide-up delay-1" class="pageHeader__title">PROPERTIES</h1>
+
+        <div data-anim-child="slide-up delay-2" class="pageHeader-nav">
+          <div class="pageHeader-nav__link">
+            <a href="{% url 'developments:home' %}">Home</a>
+          </div>
+          <span>-</span>
+          <div class="pageHeader-nav__link">
+            <span>PROPERTIES</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Property grid #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row y-gap-60">
+
+          {% for property in properties %}
+          <div data-anim="slide-up delay-1" class="col-sm-6">
+            <a href="{{ property.get_absolute_url }}" class="imageCard -type-2 hover-btn-explore">
+              <div class="imageCard__image relative ratio ratio-69:50">
+                {% if property.main_image %}
+                  <img src="{{ property.main_image.url }}" alt="{{ property.main_image_alt|default:property.name }}" class="img-ratio">
+                {% else %}
+                  <img src="{% static 'images/imageSlider/2/doubleroom.png' %}" alt="{{ property.name }}" class="img-ratio">
+                {% endif %}
+
+                <div class="hover-btn-explore__item">
+                  <button class="button text-white bg-dark-1 size-120 fw-500 rounded-full">Explore</button>
+                </div>
+              </div>
+
+              <h3 class="imageCard__title text-dark-1">
+                {% if property.property_type %}{{ property.property_type.name|upper }}{% else %}{{ property.name|upper }}{% endif %}
+              </h3>
+              <p class="imageCard__text text-dark-1">
+                {{ property.get_status_display|upper }}{% if property.project.location %} • {{ property.project.location|upper }}{% endif %}
+              </p>
+            </a>
+          </div>
+          {% empty %}
+          <div class="col-12">
+            <p class="text-18">No properties are listed yet. Please check back soon.</p>
+          </div>
+          {% endfor %}
+
+        </div>
+
+        {# Pagination #}
+        {% if is_paginated %}
+        <div class="pagination -buttons justify-center mt-60 md:mt-20">
+          <div class="row x-gap-10 y-gap-10 items-center">
+            {% if page_obj.has_previous %}
+            <div class="col-auto">
+              <a href="?page={{ page_obj.previous_page_number }}" class="button -md -outline-dark-1 text-dark-1">
+                <i class="icon-left-arrow"></i>
+              </a>
+            </div>
+            {% endif %}
+
+            {% for num in paginator.page_range %}
+            <div class="col-auto">
+              {% if num == page_obj.number %}
+                <span class="button -md -dark-1 bg-accent-1 text-white">{{ num }}</span>
+              {% else %}
+                <a href="?page={{ num }}" class="button -md -outline-dark-1 text-dark-1">{{ num }}</a>
+              {% endif %}
+            </div>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <div class="col-auto">
+              <a href="?page={{ page_obj.next_page_number }}" class="button -md -outline-dark-1 text-dark-1">
+                <i class="icon-right-arrow"></i>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+{% endblock %}

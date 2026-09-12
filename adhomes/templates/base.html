@@ -1,141 +1,76 @@
-
 {% load static i18n %}<!DOCTYPE html>
-{% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>
-      {% block title %}
-      adhomes
-    {% endblock title %}
-  </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-        content="it a website" />
-  <meta name="author"
-        content="pantelis athanasiou" />
-  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
-  {% block css %}
-    <!-- Latest compiled and minified Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
-          integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
-<!-- Your stuff: Third-party CSS libraries go here -->
-<!-- This file stores project-specific CSS -->
+<html lang="en" data-x="html" data-x-toggle="html-overflow-hidden">
 
-  
-  <link href="{% static 'css/project.css' %}" rel="stylesheet" />
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <meta name="description" content="{% block meta_description %}A.D Homeshelter Ltd — property development in Larnaca, Cyprus.{% endblock %}">
 
-{% endblock css %}
-<!-- Le javascript
-    ================================================== -->
-{# Placed at the top of the document so pages load faster with defer #}
-{% block javascript %}
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{% static 'css/vendors.css' %}">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-<!-- Bootstrap JS -->
-<script defer
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
-        integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"></script>
-<!-- Your stuff: Third-party javascript libraries go here -->
-
-
-<!-- place project specific Javascript in this file -->
-
-  
-  <script defer src="{% static 'js/project.js' %}"></script>
-
-
-{% endblock javascript %}
+  <title>{% block title %}A.D HOMESHELTER LTD{% endblock %}</title>
+  {% block extra_head %}{% endblock %}
 </head>
-<body class="{% block bodyclass %}{% endblock bodyclass %}">
-  {% block body %}
-  <div class="mb-1">
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <div class="container-fluid">
-        <button class="navbar-toggler navbar-toggler-right"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="{% url 'home' %}">adhomes</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            {% if request.user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="{% url 'users:detail' request.user.username %}">{% translate "My Profile" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-              </li>
-            {% else %}
-              {% if ACCOUNT_ALLOW_REGISTRATION %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
-                </li>
-              {% endif %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <div class="container">
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-          {{ message }}
-          <button type="button"
-                  class="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="Close"></button>
-        </div>
-      {% endfor %}
-    {% endif %}
-    {% block main %}
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-    {% endblock main %}
 
+<body>
+  <div class="preloader js-preloader">
+    <div class="preloader__wrap">
+      <div class="preloader__icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_729_2673)">
+            <path d="M12.8442 10.5589L15.9802 9.39139L16.0126 31.9993C17.0681 31.9994 18.1209 31.8957 19.156 31.6895V10.56L15.999 8.7373L12.8442 10.5589Z" fill="#C29F7B" />
+            <path d="M27.3139 4.68612C24.2917 1.66467 20.274 0 16 0C11.726 0 7.70831 1.66467 4.68612 4.68612C1.66394 7.70758 0 11.7264 0 16C0 20.2736 1.66467 24.2917 4.68612 27.3139C6.11337 28.7454 7.7991 29.8934 9.65399 30.697C10.667 31.1348 11.7232 31.4651 12.8051 31.6825V15.1386L9.6492 13.3159L6.49332 15.1367L9.63005 13.9696L9.6492 27.5326C5.5877 25.2861 2.83178 20.9598 2.83178 16C2.83178 8.73916 8.73916 2.83178 16 2.83178C23.2608 2.83178 29.1686 8.73916 29.1686 16C29.1708 19.3934 27.8585 22.6557 25.507 25.1023V15.1386L22.3501 13.3159L19.1949 15.1367L22.3309 13.9696L22.3552 30.6937C23.472 30.2099 24.5294 29.5993 25.5067 28.874C26.1465 28.3988 26.7505 27.8772 27.3139 27.3135C30.3361 24.2913 32 20.2736 32 15.9996C32 11.7256 30.3361 7.70831 27.3139 4.68612Z" fill="#C29F7B" />
+          </g>
+          <defs>
+            <clipPath id="clip0_729_2673">
+              <rect width="32" height="32" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="preloader__title">A.D HOMESHELTER</div>
   </div>
-  {% endblock body %}
-  <!-- /container -->
-  {% block modal %}
-  {% endblock modal %}
-  {% block inline_javascript %}
-    {% comment %}
-    Script tags with only code, no src (defer by default). To run
-    with a "defer" so that you run inline code:
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        /* Run whatever you want */
-      });
-    </script>
-    {% endcomment %}
-  {% endblock inline_javascript %}
+
+  <!-- cursor start -->
+  <div class="cursor js-cursor">
+    <div class="cursor__wrapper">
+      <div class="cursor__follower js-follower"></div>
+      <div class="cursor__label js-label"></div>
+      <div class="cursor__icon js-icon"></div>
+    </div>
+  </div>
+  <!-- cursor end -->
+
+  <button class="toTopButton js-top-button">
+    <i class="icon-down-arrow"></i>
+  </button>
+
+  <main>
+
+    {% include "includes/header.html" %}
+
+    {% block content %}{% endblock %}
+
+    {% include "includes/footer.html" %}
+
+    {% include "includes/request_form.html" %}
+  </main>
+
+  <!-- JavaScript -->
+  <script src="{% static 'js/vendors.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
 </body>
+
 </html>

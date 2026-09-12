@@ -1,0 +1,44 @@
+.imageCard.-type-4 {
+  position: relative;
+  
+  .imageCard {
+    &__image {}
+
+    &__content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      margin: 20px;
+      background-color: white;
+      transform: translateY(16px);
+      opacity: 0;
+      transition: all 0.4s $easeOutQuart;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 36px;
+      color: var(--color-dark-1);
+    }
+
+    &__text {
+      line-height: 30px;
+      color: var(--color-dark-1);
+    }
+  }
+
+  &:hover {
+    .imageCard {
+      &__content {
+        transform: none;
+        opacity: 1;
+      }
+    }
+  }
+}

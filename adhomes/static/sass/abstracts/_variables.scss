@@ -1,0 +1,52 @@
+:root {
+  --font-primary: "Jost", sans-serif;
+}
+
+$breakpoints: (
+  xs: 480px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+$breakpoints-loop: (
+  xl: 1200px,
+  lg: 992px,
+  md: 768px,
+  sm: 576px,
+  xs: 480px,
+);
+
+$font-size: 16px;
+$text-sizes:
+  14, 15, 16, 18, 20, 24, 30, 36, 38, 40, 44, 55, 62, 72, 82
+;
+
+:root {
+  @each $size in $text-sizes {
+    --text-#{$size}: #{$size}px;
+  }
+}
+
+$colors: (
+  white: #FFFFFF,
+  black: #000000,
+  border: #DDDDDD,
+
+  accent-1: #C29F7B,
+  accent-2: #F7F0EC,
+
+  dark-1: #181D24,
+  dark-2: #191D23,
+  dark-3: #121418,
+  dark-4: #71677A,
+  dark-5: #2F3337,
+);
+
+:root {
+  @each $name, $color in $colors {
+    --color-#{$name}: #{$color};
+  }
+}

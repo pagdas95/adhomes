@@ -1,0 +1,32 @@
+@import './abstracts/tools';
+@import './abstracts/variables';
+
+@import './animations/easings.scss';
+@import './animations/animations.scss';
+@import './animations/core.scss';
+
+@import './base/base';
+@import './base/button';
+@import './base/form';
+@import './base/typography';
+
+@import './components/header/_main.scss';
+@import './components/hero/_main.scss';
+@import './components/imageCard/_main.scss';
+@import './components/iconCard/_main.scss';
+@import './components/numberCard/_main.scss';
+@import './components/blogCard/_main.scss';
+@import './components/testimonials/_main.scss';
+@import './components/tabs/_main.scss';
+@import './components/shapeBg/_main.scss';
+@import './components/footer/_main.scss';
+
+@import './components/preloader.scss';
+@import './components/cursor.scss';
+@import './components/menu.scss';
+@import './components/pageHeader.scss';
+@import './components/marquee.scss';
+@import './components/sliderNav.scss';
+
+@import './utilities/spacing';
+@import './utilities/utilities';

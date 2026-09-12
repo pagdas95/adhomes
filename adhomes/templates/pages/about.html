@@ -1,3 +1,270 @@
 {% extends "base.html" %}
+{% load static %}
 
+{% block title %}About Us — A.D HOMESHELTER LTD{% endblock %}
+{% block meta_description %}Learn about A.D Homeshelter — a property development and construction company creating modern residences across Larnaca, Cyprus.{% endblock %}
 
+{% block content %}
+
+    {# Page header #}
+    <section data-anim-wrap class="pageHeader -type-1">
+      <div data-anim-child="fade delay-1" class="pageHeader__image">
+        <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="image">
+      </div>
+
+      <div class="container">
+        <h1 data-anim-child="slide-up delay-1" class="pageHeader__title">About us</h1>
+
+        <div data-anim-child="slide-up delay-2" class="pageHeader-nav">
+          <div class="pageHeader-nav__link">
+            <a href="{% url 'developments:home' %}">Home</a>
+          </div>
+          <span>-</span>
+          <div class="pageHeader-nav__link">
+            <span>About Us</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Building Homes intro #}
+    <section class="layout-pt-lg">
+      <div class="container">
+        <div class="row y-gap-30 justify-between items-center">
+          <div class="col-lg-6">
+            <div class="imageGrid -type-1">
+              <div class="imageGrid__images">
+                <img src="{% static 'images/hero/hero-9/livadia.jpg' %}" alt="image">
+                <img src="{% static 'images/hero/hero-9/aradipou.jpg' %}" alt="image">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-5 col-lg-6">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              Building Homes.<br>
+             <span class="text-accent-1">Creating Lasting Value.</span><br class="lg:d-none">
+            </h2>
+
+            <p class="text-18 md:text-16 mt-60 xl:mt-20">At A.D. Homeshelter, we create modern residences designed around the way people live today. Combining contemporary architecture, quality materials and thoughtful design, every development is built with attention to detail, comfort and long-term value. From carefully selected locations to functional interiors and high construction standards, our goal is simple: to create homes you can feel confident in — whether you're looking for your next home or a property investment in Cyprus.</p>
+
+            <div class="d-flex mt-60 xl:mt-30">
+              <button class="button -md -dark-1 bg-accent-1 text-white">
+                Discover Our Story
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Our Services #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">OUR</span><br>
+              SERVICES
+            </h2>
+          </div>
+
+          <div class="col-xl-6">
+            <p class="">From concept to completion, we manage every stage of the property journey with a focus on quality, reliability and attention to detail. Our experience in development, construction and property sales allows us to create homes that deliver lasting value.</p>
+          </div>
+        </div>
+
+        <div data-anim-wrap class="row y-gap-30 pt-60 md:pt-30">
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-1" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-building text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">PROPERTY DEVELOPMENT</h3>
+              <p class="mt-10">We develop thoughtfully planned residential projects in carefully selected locations, combining modern living with long-term value.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-2" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-group text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">CONSTRUCTION</h3>
+              <p class="mt-10">Quality construction is at the heart of every project, with carefully selected materials, trusted professionals and attention to every detail.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-3" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-map text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">ARCHITECTURAL &amp; MODERN DESIGN</h3>
+              <p class="mt-10">We create contemporary, functional spaces designed around everyday living, comfort and timeless aesthetics.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-4" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-badge text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">PROPERTY SALES</h3>
+              <p class="mt-10">Our team guides you through the property-buying process, helping you find the home that best suits your lifestyle and requirements.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-5" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-like text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">INVESTMENT OPPORTUNITIES</h3>
+              <p class="mt-10">We help buyers discover carefully selected real estate opportunities with strong potential for long-term value in Cyprus.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div data-anim-child="slide-up delay-6" class="hover-icon-1 bg-white px-40 py-40 md:px-30 bg-accent-2">
+              <div class="size-100 flex-center rounded-full text-accent-1 border-accent-1 hover-icon-1__item">
+                <i class="icon-technological text-40"></i>
+              </div>
+              <h3 class="text-20 mt-30">AFTER-SALES SUPPORT</h3>
+              <p class="mt-10">Our relationship continues beyond the purchase, providing reliable support and assistance throughout the handover process and beyond.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {# Our Team #}
+    <section class="layout-pt-lg layout-pb-lg bg-dark-1">
+      <div class="container">
+        <div class="row y-gap-15 justify-between items-center">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500 text-white">
+              <span class="text-accent-1">OUR</span><br>
+              TEAM
+            </h2>
+          </div>
+
+          <div class="col-lg-6 col-md-9">
+            <p class="text-white">
+              Our team brings together experience in property development, construction and sales, working closely at every stage to deliver homes built with care, quality and long-term value.
+            </p>
+          </div>
+        </div>
+
+        <div data-anim-wrap class="row y-gap-30 pt-60 md:pt-30">
+
+          <div class="col-lg-3 col-sm-6">
+            <div data-anim-child="slide-left delay-1" class="teamCard -type-1">
+              <div class="teamCard__image ratio ratio-33:35">
+                <img src="{% static 'images/teamCard/1/1.png' %}" alt="image" class="img-ratio">
+              </div>
+              <h3 class="teamCard__title text-20 mt-20 uppercase text-white">Cody Fisher</h3>
+              <div class="teamCard__job uppercase text-white">Director of Sales</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <div data-anim-child="slide-left delay-2" class="teamCard -type-1">
+              <div class="teamCard__image ratio ratio-33:35">
+                <img src="{% static 'images/teamCard/1/2.png' %}" alt="image" class="img-ratio">
+              </div>
+              <h3 class="teamCard__title text-20 mt-20 uppercase text-white">Dianne Russell</h3>
+              <div class="teamCard__job uppercase text-white">UX Designer</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <div data-anim-child="slide-left delay-3" class="teamCard -type-1">
+              <div class="teamCard__image ratio ratio-33:35">
+                <img src="{% static 'images/teamCard/1/3.png' %}" alt="image" class="img-ratio">
+              </div>
+              <h3 class="teamCard__title text-20 mt-20 uppercase text-white">Leslie Alexander</h3>
+              <div class="teamCard__job uppercase text-white">VP of Technology</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <div data-anim-child="slide-left delay-4" class="teamCard -type-1">
+              <div class="teamCard__image ratio ratio-33:35">
+                <img src="{% static 'images/teamCard/1/4.png' %}" alt="image" class="img-ratio">
+              </div>
+              <h3 class="teamCard__title text-20 mt-20 uppercase text-white">Darrell Steward</h3>
+              <div class="teamCard__job uppercase text-white">VP of Sales</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {# Our Work heading #}
+    <section class="pb-60 md:pb-30 mt-20">
+      <div class="container">
+        <div class="row y-gap-20 justify-between items-end">
+          <div class="col-auto">
+            <h2 class="text-62 md:text-38 uppercase fw-500">
+              <span class="text-accent-1">OUR WORK</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Image slider #}
+    <section class="imageSlider -type-1 -center mb-30">
+      <div class="imageSlider__slider relative js-section-slider" data-gap="0" data-slider-cols="xl-1 lg-1 md-1 sm-1 base-1" data-nav-prev="js-imgSlider-prev" data-nav-next="js-imgSlider-next">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="imageSlider__image">
+              <img src="{% static 'images/imageSlider/3/pool.jpg' %}" alt="image">
+            </div>
+            <h4 class="imageSlider__title text-white">Pool</h4>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="imageSlider__image">
+              <img src="{% static 'images/imageSlider/3/bathroom.jpg' %}" alt="image">
+            </div>
+            <h4 class="imageSlider__title text-white">Bathroom</h4>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="imageSlider__image">
+              <img src="{% static 'images/imageSlider/3/kitchen.jpg' %}" alt="image">
+            </div>
+            <h4 class="imageSlider__title text-white">Kitchen</h4>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="imageSlider__image">
+              <img src="{% static 'images/imageSlider/3/luxury.png' %}" alt="image">
+            </div>
+            <h4 class="imageSlider__title text-white">LIVING ROOM</h4>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="imageSlider__content">
+        <div class="imageSlider__nav">
+          <div class="container">
+            <button class="button size-80 -outline-white rounded-full text-white -prev js-imgSlider-prev">
+              <i class="icon-left-arrow text-20"></i>
+            </button>
+            <button class="button size-80 -outline-white rounded-full text-white -next ml-20 js-imgSlider-next">
+              <i class="icon-right-arrow text-20"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% load static %}
+<header class="header -type-9 js-header">
+  <div data-anim="fade delay-3" class="header__container">
+    <div class="header__left">
+      <button class="header__menuBtn js-menu-button">
+        <i></i>
+      </button>
+
+      <a href="{% url 'developments:home' %}" class="header__logo">
+        <img src="{% static 'images/general/ad_homeshelter_white_75_percent_smaller.svg' %}" style="max-width: 75%;" alt="A.D Homeshelter logo">
+        <img src="{% static 'images/general/ad_homeshelter_black_75_percent_smaller.svg' %}" style="max-width: 70%;" alt="A.D Homeshelter logo">
+      </a>
+    </div>
+
+    <div class="header__right">
+      <div class="header__number xl:d-none">
+        <a href="tel:+35797570036">+35797570036</a>
+      </div>
+
+      <div class="header__socials">
+        <a href="#" class="icon-facebook"></a>
+        <a href="#" class="icon-instagram"></a>
+      </div>
+
+      <button class="header__button button -md -dark-1 text-white js-toggle-requestForm">
+        CONTACT US
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu -top-header js-menu">
+  <div class="menu__left">
+    <div class="menuNav js-menuNav">
+      <div class="menuNav__item">
+        <a href="{% url 'developments:home' %}">HOME</a>
+      </div>
+      <div class="menuNav__item">
+        <a href="{% url 'about' %}">ABOUT</a>
+      </div>
+      <div class="menuNav__item">
+        <a href="{% url 'developments:project_list' %}">PROJECTS</a>
+      </div>
+      <div class="menuNav__item">
+        <a href="{% url 'developments:property_list' %}">PROPERTIES</a>
+      </div>
+      <div class="menuNav__item">
+        <a href="{% url 'developments:contact' %}">CONTACT US</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu__right">
+    <div class="menuImage js-menuImage">
+      <img src="{% static 'images/hero/hero-9/aradipou.jpg' %}" alt="image">
+    </div>
+  </div>
+
+  <div class="menu__close js-menuClose js-menu-button">
+    <i class="icon-cross"></i>
+  </div>
+</div>

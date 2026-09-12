@@ -1,0 +1,110 @@
+.iconCard.-type-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .iconCard {
+    &__content {
+    }
+
+    &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      font-size: 40px;
+      border-radius: 100%;
+      border: 1px solid var(--color-accent-1);
+      margin: 0 auto;
+      margin-bottom: 30px;
+      transition: all 0.3s $easeOutQuart;
+
+      @include media-below(md) {
+        margin-bottom: 20px;
+      }
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 36px;
+    }
+
+    &__text {
+      margin-top: 6px;
+    }
+  }
+
+  &:hover {
+    .iconCard {
+      &__icon {
+        color: white;
+        background-color: var(--color-accent-1);
+      }
+  
+      &__title {
+        color: white;
+      }
+  
+      &__text {
+        color: white;
+      }
+    }
+  }
+
+  &.-hover-2 {
+    &:hover {
+      .iconCard {
+        &__icon {
+          color: white;
+          background-color: var(--color-accent-1);
+        }
+    
+        &__title {
+          color: black;
+        }
+    
+        &__text {
+          color: black;
+        }
+      }
+    }
+  }
+
+  &.-dark {
+    &:hover {
+      .iconCard {
+        &__icon {
+          color: white;
+          background-color: var(--color-accent-1);
+        }
+    
+        &__title {
+          color: black;
+        }
+    
+        &__text {
+          color: black;
+        }
+      }
+    }
+  }
+
+  &.-light {
+    .iconCard {
+      &__icon {
+        border: 1px solid rgba(white, 0.1);
+      }
+    }
+  
+    &:hover {
+      .iconCard {
+        &__icon {
+          background-color: rgba(white, 0.1);
+        }
+      }
+    }
+  }
+}

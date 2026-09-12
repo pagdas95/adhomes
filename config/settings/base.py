@@ -84,6 +84,7 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    "django.contrib.humanize"
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -97,6 +98,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "adhomes.users",
+    "adhomes.developments",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -1,0 +1,43 @@
+.iconCard.-type-3 {
+  display: flex;
+
+  @include media-below(sm) {
+    flex-direction: column;
+  }
+
+  .iconCard {
+    &__content {
+    }
+
+    &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      font-size: 40px;
+      border-radius: 100%;
+      border: 1px solid var(--color-accent-1);
+      margin-right: 20px;
+      
+      @include media-below(sm) {
+        width: 80px;
+        height: 80px;
+        margin-right: 0;
+        margin-bottom: 12px;
+      }
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 36px;
+      text-transform: uppercase;
+    }
+
+    &__text {
+      margin-top: 6px;
+    }
+  }
+}

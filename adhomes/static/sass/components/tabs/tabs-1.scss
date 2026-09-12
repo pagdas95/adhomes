@@ -1,0 +1,128 @@
+.mapPlaces {
+  .mapPlaces {
+    &__map {
+      position: relative;
+      right: -100px;
+
+      @include media-below(md) {
+        right: 0;
+      }
+    }
+  }
+
+  .mapPlacesCard {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    opacity: 0.3;
+
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 36px;
+    }
+
+    &__caption {
+      font-size: 16px;
+      line-height: 30px;
+    }
+
+    &__image {
+      width: 150px;
+      height: 150px;
+      
+      @include media-below(md) {
+        width: 120px;
+        height: 120px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &.isCardActive {
+      opacity: 1;
+    }
+  }
+
+  .mapPlacesPlace {
+    position: absolute;
+
+    &:nth-child(2) {
+      top: 50%;
+      left: 47%;
+    }
+
+    &:nth-child(3) {
+      top: 30%;
+      left: 47%;
+    }
+
+    &:nth-child(4) {
+      top: 50%;
+      left: 27%;
+    }
+
+    &:nth-child(5) {
+      top: 20%;
+      left: 17%;
+    }
+
+    &__marker {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      background-color: var(--color-accent-1);
+      border-radius: 100%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: var(--color-accent-1);
+        opacity: 0.4;
+        border-radius: 100%;
+      }
+    }
+
+    &__content {
+      position: absolute;
+      bottom: calc(100% + 25px);
+      left: 50%;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.8;
+      color: white;
+      text-transform: uppercase;
+      padding: 8px 22px;
+      background-color: var(--color-accent-1);
+      border-radius: 200px;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+      transform: translateY(12px) translateX(-50%);
+      opacity: 0;
+    }
+    
+    &.isActive {
+      .mapPlacesPlace__content {
+        transform: translateX(-50%);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.-apartments {
+  .tabs__controls .is-tab-el-active {
+    background-color: var(--color-accent-2);
+  }
+}
