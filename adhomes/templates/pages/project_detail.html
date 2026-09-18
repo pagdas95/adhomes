@@ -161,7 +161,7 @@
     {# ==================== CHECK AVAILABILITY (table) ============== #}
     {% if units %}
     <section class="layout-pt-lg layout-pb-lg">
-      <div class="container overflow-hidden">
+      <div class="container">
         <div class="row justify-center">
           <div class="col-auto">
             <h2 class="text-62 md:text-38 uppercase fw-500">
@@ -172,36 +172,42 @@
 
         <div class="row y-gap-30 pt-60 md:pt-30">
           <div class="col-12">
-            <div data-anim="slide-left delay-1" class="table -type-1">
-              <table>
+            <div data-anim="slide-left delay-1" class="table -type-1" style="overflow-x:auto;">
+              <table style="min-width:900px;">
                 <thead>
                   <tr>
                     <td>RESIDENCE</td>
-                    <td>BED/BATH</td>
-                    <td>SQ.M.</td>
+                    <td>TYPE</td>
+                    <td>FLOOR</td>
+                    <td>BED</td>
+                    <td>BATH</td>
+                    <td>PARKING</td>
+                    <td>INTERNAL M²</td>
+                    <td>COVERED M²</td>
+                    <td>BALCONY M²</td>
                     <td>STATUS</td>
                     <td>PRICE</td>
-                    <td>FLOOR PLAN</td>
                   </tr>
                 </thead>
 
                 {% for unit in units %}
                 <tr>
-                  <td>{{ unit.name|upper }}</td>
-                  <td>{{ unit.bedrooms }}/{{ unit.bathrooms }}</td>
+                  <td>
+                    <a href="{{ unit.get_absolute_url }}" class="text-dark-1">{{ unit.name|upper }}</a>
+                  </td>
+                  <td>{% if unit.property_type %}{{ unit.property_type.name }}{% else %}—{% endif %}</td>
+                  <td>{{ unit.floor|default:"—" }}</td>
+                  <td>{{ unit.bedrooms }}</td>
+                  <td>{{ unit.bathrooms }}</td>
+                  <td>{{ unit.parking_spaces }}</td>
                   <td>{% if unit.internal_area %}{{ unit.internal_area|floatformat:0 }}{% else %}—{% endif %}</td>
+                  <td>{% if unit.covered_area %}{{ unit.covered_area|floatformat:0 }}{% else %}—{% endif %}</td>
+                  <td>{% if unit.balcony_area %}{{ unit.balcony_area|floatformat:0 }}{% else %}—{% endif %}</td>
                   <td>{{ unit.get_status_display|upper }}</td>
                   <td>
                     {% if unit.price_on_request %}On request
                     {% elif unit.price %}€{{ unit.price|floatformat:0|intcomma }}
                     {% else %}—{% endif %}
-                  </td>
-                  <td>
-                    {% if unit.floor_plan %}
-                      <a href="{{ unit.floor_plan.url }}" target="_blank" class="button -underline">VIEW NOW</a>
-                    {% else %}
-                      <span class="text-light-1">—</span>
-                    {% endif %}
                   </td>
                 </tr>
                 {% endfor %}
