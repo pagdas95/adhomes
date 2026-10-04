@@ -290,6 +290,14 @@ class Property(models.Model):
         max_digits=8, decimal_places=2, null=True, blank=True,
         help_text="Balcony / veranda, square metres.",
     )
+    outdoor_areas = models.TextField(
+        blank=True,
+        help_text=(
+            "Other outdoor areas as a comma-separated list, e.g. "
+            "'Garden 52 m², Pool area 110 m², Covered veranda 22 m²'. "
+            "Shown as a list on the property page."
+        ),
+    )
     floor = models.CharField(
         max_length=50, blank=True,
         help_text="e.g. 'Ground', '2nd', 'Penthouse level'.",

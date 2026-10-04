@@ -180,7 +180,7 @@ class PropertyAdmin(admin.ModelAdmin):
         ("Details", {
             "fields": (
                 "bedrooms", "bathrooms", "parking_spaces",
-                "internal_area", "covered_area", "balcony_area", "floor",
+                "internal_area", "covered_area", "balcony_area", "outdoor_areas", "floor",
             ),
         }),
         ("Price", {"fields": ("price", "price_on_request")}),

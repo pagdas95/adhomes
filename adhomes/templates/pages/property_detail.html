@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static humanize %}
+{% load static humanize developments_extras %}
 
 {% block title %}{{ property.meta_title|default:property.name }} — {{ property.project.name }}{% endblock %}
 {% block meta_description %}{{ property.meta_description|default:property.description|truncatechars:160 }}{% endblock %}
@@ -132,6 +132,28 @@
         </div>
       </div>
     </section>
+
+    {# ======================= OUTDOOR AREAS ======================== #}
+    {% if property.outdoor_areas %}
+    <section class="layout-pt-lg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="text-20 uppercase fw-500">Outdoor areas</h3>
+            <div class="row y-gap-10 pt-30">
+              {% for area in property.outdoor_areas|split_commas %}
+              <div class="col-md-4 col-sm-6">
+                <div class="d-flex justify-between border-bottom-accent-2 pb-15">
+                  <div>{{ area }}</div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
     {# ========================= IMAGE SLIDER ======================= #}
     {% if property.images.all %}
