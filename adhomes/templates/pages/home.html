@@ -145,7 +145,7 @@
 
             {% for property in featured_properties %}
             <div class="swiper-slide">
-              <a href="#" class="imageCard -type-2 hover-btn-explore">
+              <a href="{{ property.get_absolute_url }}" class="imageCard -type-2 hover-btn-explore">
                 <div class="imageCard__image relative ratio ratio-45:55">
                   {% if property.main_image %}
                     <img src="{{ property.main_image.url }}" alt="{{ property.main_image_alt|default:property.name }}" class="img-ratio">

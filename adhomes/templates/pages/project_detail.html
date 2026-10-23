@@ -3,6 +3,29 @@
 
 {% block title %}{{ project.meta_title|default:project.name }} — A.D HOMESHELTER LTD{% endblock %}
 {% block meta_description %}{{ project.meta_description|default:project.short_description }}{% endblock %}
+{% block og_title %}{{ project.meta_title|default:project.name }} — A.D Homeshelter{% endblock %}
+{% block og_description %}{{ project.meta_description|default:project.short_description }}{% endblock %}
+{% block og_type %}website{% endblock %}
+{% if project.main_image %}{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ project.main_image.url }}{% endblock %}{% endif %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Residence",
+  "name": "{{ project.name|escapejs }}",
+  "description": "{{ project.short_description|default:project.meta_description|escapejs }}",
+  "url": "{{ request.build_absolute_uri }}",
+  {% if project.main_image %}"image": "{{ request.scheme }}://{{ request.get_host }}{{ project.main_image.url }}",{% endif %}
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "{{ project.location|escapejs }}",
+    "addressRegion": "Larnaca",
+    "addressCountry": "CY"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 
