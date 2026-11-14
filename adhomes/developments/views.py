@@ -3,6 +3,7 @@ import logging
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import EmailMessage
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, ListView, TemplateView
 
@@ -105,26 +106,54 @@ class ContactView(FormView):
     form_class = LeadForm
     success_url = reverse_lazy("developments:contact")
 
+    SUCCESS_MESSAGE = "Thank you — your message has been sent. We'll be in touch shortly."
+
+    def is_ajax(self):
+        return self.request.headers.get("x-requested-with") == "XMLHttpRequest"
+
     def form_valid(self, form):
         lead = form.save()
         self.notify(lead)
-        messages.success(
-            self.request,
-            "Thank you — your message has been sent. We'll be in touch shortly.",
-        )
+        # Forms on other pages submit in the background and show a pop-up.
+        if self.is_ajax():
+            return JsonResponse({"ok": True, "message": self.SUCCESS_MESSAGE})
+        messages.success(self.request, self.SUCCESS_MESSAGE)
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        if self.is_ajax():
+            errors = {field: [str(e) for e in errs] for field, errs in form.errors.items()}
+            return JsonResponse({"ok": False, "errors": errors}, status=400)
+        return super().form_invalid(form)
 
     def notify(self, lead):
         """Email the lead to the company inbox. The lead is already saved,
         so a mail failure is logged rather than shown to the visitor."""
+        about = ""
+        if lead.property:
+            about = (
+                f"Property: {lead.property.name} ({lead.property.project.name})\n"
+                f"Link: {self.request.build_absolute_uri(lead.property.get_absolute_url())}\n\n"
+            )
+            subject = f"Viewing request for {lead.property.name} from {lead.name}"
+        elif lead.project:
+            about = (
+                f"Project: {lead.project.name}\n"
+                f"Link: {self.request.build_absolute_uri(lead.project.get_absolute_url())}\n\n"
+            )
+            subject = f"Enquiry about {lead.project.name} from {lead.name}"
+        else:
+            subject = f"New contact request from {lead.name}"
+
         body = (
+            f"{about}"
             f"Name: {lead.name}\n"
             f"Email: {lead.email}\n"
             f"Phone: {lead.phone or '-'}\n\n"
-            f"Message:\n{lead.message}\n"
+            f"Message:\n{lead.message or '-'}\n"
         )
         email = EmailMessage(
-            subject=f"New contact request from {lead.name}",
+            subject=subject,
             body=body,
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=[settings.CONTACT_EMAIL],

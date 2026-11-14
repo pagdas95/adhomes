@@ -50,8 +50,10 @@
               {% endfor %}
             {% endif %}
 
-            <form method="post" action="{% url 'developments:contact' %}" novalidate>
+            <form method="post" action="{% url 'developments:contact' %}" class="js-lead-form" novalidate>
               {% csrf_token %}
+              {{ form.project }}
+              {{ form.property }}
 
               {% if form.non_field_errors %}
                 <div class="mb-20 text-accent-1">{{ form.non_field_errors }}</div>

@@ -294,28 +294,36 @@
 
         <div class="row justify-center pt-60 md:pt-30">
           <div class="col-xl-6 col-lg-8 col-md-10">
-            <div class="contactForm">
+            <form method="post" action="{% url 'developments:contact' %}" class="contactForm js-lead-form">
+              {% csrf_token %}
+              <input type="hidden" name="project" value="{{ project.pk }}">
+
               <div class="contactForm__field">
                 <div class="contactForm__caption">Name</div>
-                <input type="text">
+                <input type="text" name="name" maxlength="150" required>
               </div>
 
               <div class="contactForm__field mt-30">
                 <div class="contactForm__caption">phone</div>
-                <input type="text">
+                <input type="tel" name="phone" maxlength="50">
               </div>
 
               <div class="contactForm__field mt-30">
-                <div class="contactForm__caption">email (optional)</div>
-                <input type="text">
+                <div class="contactForm__caption">email</div>
+                <input type="email" name="email" required>
+              </div>
+
+              <div class="contactForm__field mt-30">
+                <div class="contactForm__caption">Your message</div>
+                <textarea name="message" rows="3"></textarea>
               </div>
 
               <div class="mt-30">
-                <button class="button -md -dark-1 bg-accent-1 text-white col-12">
+                <button type="submit" class="button -md -dark-1 bg-accent-1 text-white col-12">
                   SEND REQUEST
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

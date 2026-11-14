@@ -16,6 +16,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{% static 'css/vendors.css' %}">
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/project.css' %}">
 
   <title>{% block title %}A.D HOMESHELTER LTD{% endblock %}</title>
   {% block extra_head %}{% endblock %}
@@ -53,9 +54,15 @@
     {% include "includes/request_form.html" %}
   </main>
 
+  <div class="toast js-toast" role="status" aria-live="polite">
+    <div class="toast__text js-toast-text"></div>
+    <button type="button" class="toast__close js-toast-close" aria-label="Close">&times;</button>
+  </div>
+
   <!-- JavaScript -->
   <script src="{% static 'js/vendors.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/project.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </body>
 
