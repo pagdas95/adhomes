@@ -238,6 +238,8 @@ EMAIL_BACKEND = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
+# Inbox that receives contact form submissions.
+CONTACT_EMAIL = env("CONTACT_EMAIL", default="a.d.homesheltersocial@gmail.com")
 
 # ADMIN
 # ------------------------------------------------------------------------------

@@ -1,9 +1,15 @@
+import logging
+
+from django.conf import settings
 from django.contrib import messages
+from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, ListView, TemplateView
 
 from .forms import LeadForm
 from .models import Project, Property
+
+logger = logging.getLogger(__name__)
 
 
 class HomeView(TemplateView):
@@ -100,9 +106,31 @@ class ContactView(FormView):
     success_url = reverse_lazy("developments:contact")
 
     def form_valid(self, form):
-        form.save()
+        lead = form.save()
+        self.notify(lead)
         messages.success(
             self.request,
             "Thank you — your message has been sent. We'll be in touch shortly.",
         )
         return super().form_valid(form)
+
+    def notify(self, lead):
+        """Email the lead to the company inbox. The lead is already saved,
+        so a mail failure is logged rather than shown to the visitor."""
+        body = (
+            f"Name: {lead.name}\n"
+            f"Email: {lead.email}\n"
+            f"Phone: {lead.phone or '-'}\n\n"
+            f"Message:\n{lead.message}\n"
+        )
+        email = EmailMessage(
+            subject=f"New contact request from {lead.name}",
+            body=body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[settings.CONTACT_EMAIL],
+            reply_to=[lead.email],
+        )
+        try:
+            email.send()
+        except Exception:
+            logger.exception("Failed to send contact email for lead %s", lead.pk)
