@@ -1,5 +1,7 @@
 # ruff: noqa: E501
 import logging
+from email.utils import formataddr
+from email.utils import parseaddr
 
 import sentry_sdk
 from sentry_sdk.integrations.celery import CeleryIntegration
@@ -88,6 +90,9 @@ DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL",
     default="adhomes <noreply@adhomeshelder.com>",
 )
+# Re-format so display names containing a period (e.g. "A.D Homeshelter") get
+# quoted as email requires; otherwise Django rejects the address.
+DEFAULT_FROM_EMAIL = formataddr(parseaddr(DEFAULT_FROM_EMAIL))
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
