@@ -22,6 +22,9 @@ class StaticViewSitemap(Sitemap):
             "developments:project_list",
             "developments:property_list",
             "developments:contact",
+            "privacy",
+            "cookies",
+            "terms",
         ]
 
     def location(self, item):

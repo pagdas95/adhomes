@@ -1,0 +1,23 @@
+{# Cookie notice. Essential cookies only, so this is informational: shown until #}
+{# accepted, then remembered in localStorage. Starts hidden so it never flashes. #}
+<div class="cookieBanner js-cookieBanner" role="region" aria-label="Cookie notice" hidden>
+  <p class="cookieBanner__text">
+    We use essential cookies to make this site work. By using the site you agree to our
+    <a href="{% url 'cookies' %}">Cookie Policy</a>.
+  </p>
+  <button type="button" class="cookieBanner__button button -md bg-accent-1 text-white js-cookieBanner-accept">Accept</button>
+</div>
+<script>
+  (function () {
+    var KEY = 'adh-cookie-notice-accepted'
+    var banner = document.querySelector('.js-cookieBanner')
+    var accepted = false
+    try { accepted = localStorage.getItem(KEY) === '1' } catch (e) {}
+    if (accepted || !banner) return
+    banner.hidden = false
+    banner.querySelector('.js-cookieBanner-accept').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, '1') } catch (e) {}
+      banner.hidden = true
+    })
+  })()
+</script>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{# Shared layout for the legal pages (privacy, cookies, terms). #}
+
+{% block content %}
+
+    {# Page header #}
+    <section data-anim-wrap class="pageHeader -type-1">
+      <div data-anim-child="fade delay-1" class="pageHeader__image">
+        <img src="{% static 'images/hero/hero-9/aradipou.jpg' %}" alt="image">
+      </div>
+
+      <div class="container">
+        <h1 data-anim-child="slide-up delay-1" class="pageHeader__title">{% block legal_heading %}{% endblock %}</h1>
+
+        <div data-anim-child="slide-up delay-2" class="pageHeader-nav">
+          <div class="pageHeader-nav__link">
+            <a href="{% url 'developments:home' %}">Home</a>
+          </div>
+          <span>-</span>
+          <div class="pageHeader-nav__link">
+            <span>{% block legal_breadcrumb %}{% endblock %}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Content #}
+    <section class="layout-pt-lg layout-pb-lg">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col-xl-8 col-lg-10">
+            <div class="legal">
+              <p class="legal__meta">Last updated: [PLACEHOLDER: date]</p>
+
+              <p class="legal__note"><em>This document is a general template. It should be reviewed by a qualified legal professional familiar with Cyprus and EU law before being relied on. Items marked [PLACEHOLDER] must be completed.</em></p>
+
+              {% block legal_body %}{% endblock %}
+
+              <p class="legal__related">
+                See also:
+                <a href="{% url 'privacy' %}">Privacy Policy</a> ·
+                <a href="{% url 'cookies' %}">Cookie Policy</a> ·
+                <a href="{% url 'terms' %}">Terms of Use</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

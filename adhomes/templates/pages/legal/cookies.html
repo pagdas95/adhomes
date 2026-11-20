@@ -1,0 +1,62 @@
+{% extends "pages/legal/_layout.html" %}
+
+{% block title %}Cookie Policy — A.D HOMESHELTER LTD{% endblock %}
+{% block meta_description %}The cookies used on adhomeshelder.com: essential cookies only, no analytics, advertising or tracking cookies.{% endblock %}
+
+{% block legal_heading %}Cookie policy{% endblock %}
+{% block legal_breadcrumb %}Cookie Policy{% endblock %}
+
+{% block legal_body %}
+<h2>1. What cookies are</h2>
+<p>Cookies are small text files that a website stores in your browser. They let the site remember information between pages or visits, for example that a form you are filling in really came from our site.</p>
+
+<h2>2. The cookies we use</h2>
+<p>adhomeshelder.com, operated by A.D Homeshelter Ltd, uses <strong>essential cookies only</strong>. They are strictly necessary for the website and its forms to work, so under EU and Cyprus law they do not require your consent.</p>
+
+<div class="legal__table">
+  <table>
+    <thead>
+      <tr>
+        <th>Cookie</th>
+        <th>Purpose</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>__Secure-csrftoken</code></td>
+        <td>Security: protects our contact and viewing-request forms against cross-site request forgery.</td>
+        <td>1 year</td>
+      </tr>
+      <tr>
+        <td><code>__Secure-sessionid</code></td>
+        <td>Keeps authorised staff signed in to the site's administration area. Not set for ordinary visitors.</td>
+        <td>2 weeks, or until sign-out</td>
+      </tr>
+      <tr>
+        <td><code>messages</code></td>
+        <td>Briefly holds a confirmation message (such as “Thank you — your message has been sent”) to show on the next page after you submit a form.</td>
+        <td>Until the message is shown (session)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>We also save one small value in your browser's local storage (not a cookie) to remember that you have dismissed our cookie notice, so it is not shown again. It contains no personal data.</p>
+
+<h2>3. Cookies we do not use</h2>
+<p>We currently do <strong>not</strong> use any analytics, advertising, marketing, social-media or other third-party tracking cookies. If this changes, we will update this policy and ask for your consent through a cookie banner before any non-essential cookies are set.</p>
+<p>Our website loads its typeface from Google Fonts. This does not set cookies, but your browser does connect to Google's servers. See our <a href="{% url 'privacy' %}">Privacy Policy</a> for details.</p>
+
+<h2>4. How to control cookies</h2>
+<p>You can view, block or delete cookies in your browser settings. Blocking essential cookies may stop parts of the site, such as our forms, from working. Instructions for common browsers:</p>
+<ul>
+  <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+  <li><a href="https://support.mozilla.org/kb/clear-cookies-and-site-data-firefox" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+  <li><a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+  <li><a href="https://support.microsoft.com/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+</ul>
+
+<h2>5. Contact</h2>
+<p>Questions about this policy can be sent to <a href="mailto:info@adhomeshelder.com">info@adhomeshelder.com</a>.</p>
+{% endblock %}
