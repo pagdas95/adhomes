@@ -12,6 +12,15 @@
   border-color: #eed3d7;
 }
 
+/* Lead form honeypot: off-screen so bots fill it, never seen by people. */
+.lead-hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* "Thank you" toast shown after a lead form is sent (see project.js). */
 .toast {
   position: fixed;

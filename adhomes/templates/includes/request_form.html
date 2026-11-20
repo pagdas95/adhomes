@@ -18,8 +18,8 @@
         <p class="mt-15">About: <strong>{{ project.name }}</strong></p>
       {% endif %}
 
-      <form method="post" action="{% url 'developments:contact' %}" class="requestForm__form contactForm row y-gap-30 js-lead-form">
-        {% csrf_token %}
+      <form method="post" action="{% url 'developments:lead_create' %}" class="requestForm__form contactForm row y-gap-30 js-lead-form">
+        {% include "includes/lead_form_hidden.html" %}
         {% if property.pk %}
           <input type="hidden" name="property" value="{{ property.pk }}">
         {% elif project.pk %}
@@ -29,26 +29,26 @@
         <div class="col-12">
           <div class="contactForm__field">
             <div class="lh-12 fw-500 uppercase">Full name</div>
-            <input type="text" name="name" maxlength="150" required>
+            {{ lead_form.name }}
           </div>
         </div>
         <div class="col-12">
           <div class="contactForm__field">
             <div class="lh-12 fw-500 uppercase">phone</div>
-            <input type="tel" name="phone" maxlength="50">
+            {{ lead_form.phone }}
           </div>
         </div>
         <div class="col-12">
           <div class="contactForm__field">
             <div class="lh-12 fw-500 uppercase">E-MAIL</div>
-            <input type="email" name="email" required>
+            {{ lead_form.email }}
           </div>
         </div>
 
         <div class="col-12">
           <div class="contactForm__field">
             <div class="lh-12 fw-500 uppercase">YOUR MESSAGE</div>
-            <textarea name="message" rows="3"></textarea>
+            {{ lead_form.message }}
           </div>
         </div>
         <div class="col-12">

@@ -204,6 +204,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "adhomes.users.context_processors.allauth_settings",
+                "adhomes.developments.context_processors.lead_form",
             ],
         },
     },
@@ -239,8 +240,16 @@ EMAIL_BACKEND = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
-# Inbox that receives contact form submissions.
-CONTACT_EMAIL = env("CONTACT_EMAIL", default="a.d.homesheltersocial@gmail.com")
+# https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
+DEFAULT_FROM_EMAIL = env(
+    "DJANGO_DEFAULT_FROM_EMAIL",
+    default='"A.D Homeshelter" <info@adhomeshelder.com>',
+)
+# Inbox that receives lead / contact form notifications.
+LEADS_NOTIFY_EMAIL = env("LEADS_NOTIFY_EMAIL", default="a.d.homeshelter12@gmail.com")
+# Lead form rate limit: max submissions per IP per window (seconds).
+LEADS_RATE_LIMIT = env.int("LEADS_RATE_LIMIT", default=5)
+LEADS_RATE_WINDOW = env.int("LEADS_RATE_WINDOW", default=3600)
 
 # ADMIN
 # ------------------------------------------------------------------------------

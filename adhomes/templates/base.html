@@ -61,8 +61,10 @@
     {% include "includes/request_form.html" %}
   </main>
 
-  <div class="toast js-toast" role="status" aria-live="polite">
-    <div class="toast__text js-toast-text"></div>
+  {# Toast for lead forms. Also shows flash messages after a no-JS form redirect. #}
+  <div class="toast js-toast{% for message in messages %}{% if forloop.first %} is-active{% if message.level_tag == 'error' %} -error{% endif %}{% endif %}{% endfor %}" role="status" aria-live="polite">
+    <div class="toast__text js-toast-text">{% for message in messages %}{{ message }}{% if not forloop.last %}
+{% endif %}{% endfor %}</div>
     <button type="button" class="toast__close js-toast-close" aria-label="Close">&times;</button>
   </div>
 

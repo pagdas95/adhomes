@@ -11,4 +11,5 @@ urlpatterns = [
     path("properties/", views.PropertyListView.as_view(), name="property_list"),
     path("properties/<slug:slug>/", views.PropertyDetailView.as_view(), name="property_detail"),
     path("contact/", views.ContactView.as_view(), name="contact"),
+    path("leads/", views.LeadCreateView.as_view(), name="lead_create"),
 ]

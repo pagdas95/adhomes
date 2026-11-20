@@ -42,46 +42,29 @@
         <div class="row justify-center pt-60 md:pt-30">
           <div class="col-xl-6 col-lg-8 col-md-10">
 
-            {% if messages %}
-              {% for message in messages %}
-                <div class="mb-30 px-30 py-20 bg-white text-dark-1 text-center">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-
-            <form method="post" action="{% url 'developments:contact' %}" class="js-lead-form" novalidate>
-              {% csrf_token %}
-              {{ form.project }}
-              {{ form.property }}
-
-              {% if form.non_field_errors %}
-                <div class="mb-20 text-accent-1">{{ form.non_field_errors }}</div>
-              {% endif %}
+            {# Success / error messages appear in the site-wide toast (base.html). #}
+            <form method="post" action="{% url 'developments:lead_create' %}" class="js-lead-form">
+              {% include "includes/lead_form_hidden.html" %}
 
               <div class="contactForm">
                 <div class="contactForm__field">
                   <div class="contactForm__caption">Name</div>
-                  {{ form.name }}
-                  {% if form.name.errors %}<div class="text-accent-1 mt-5">{{ form.name.errors|striptags }}</div>{% endif %}
+                  {{ lead_form.name }}
                 </div>
 
                 <div class="contactForm__field mt-30">
                   <div class="contactForm__caption">Phone</div>
-                  {{ form.phone }}
-                  {% if form.phone.errors %}<div class="text-accent-1 mt-5">{{ form.phone.errors|striptags }}</div>{% endif %}
+                  {{ lead_form.phone }}
                 </div>
 
                 <div class="contactForm__field mt-30">
                   <div class="contactForm__caption">Email</div>
-                  {{ form.email }}
-                  {% if form.email.errors %}<div class="text-accent-1 mt-5">{{ form.email.errors|striptags }}</div>{% endif %}
+                  {{ lead_form.email }}
                 </div>
 
                 <div class="contactForm__field mt-30">
                   <div class="contactForm__caption">Your message</div>
-                  {{ form.message }}
-                  {% if form.message.errors %}<div class="text-accent-1 mt-5">{{ form.message.errors|striptags }}</div>{% endif %}
+                  {{ lead_form.message }}
                 </div>
 
                 <div class="mt-30">

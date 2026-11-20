@@ -1,0 +1,8 @@
+{# Hidden parts shared by every lead form. Include inside the <form>. #}
+{% csrf_token %}
+{{ lead_form.ts }}
+<input type="hidden" name="next" value="{{ request.get_full_path }}">
+{# Honeypot: off-screen (not type=hidden) so bots fill it and people never see it. #}
+<div class="lead-hp" aria-hidden="true">
+  <label>Website {{ lead_form.website }}</label>
+</div>

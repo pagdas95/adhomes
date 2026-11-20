@@ -47,7 +47,7 @@
         document.querySelector('.js-requestForm')?.classList.remove('is-active')
         showToast(data.message)
       } else {
-        showToast(errorText(data.errors), true)
+        showToast(data.errors ? errorText(data.errors) : data.message, true)
       }
     } catch (err) {
       showToast('Could not send your message. Please check your connection and try again.', true)
@@ -55,6 +55,13 @@
       if (button) button.disabled = false
     }
   })
+
+  // A toast rendered already open (flash message after a no-JS redirect)
+  // hides itself like any other.
+  const initial = document.querySelector('.js-toast.is-active')
+  if (initial) {
+    toastTimer = setTimeout(() => initial.classList.remove('is-active'), 6000)
+  }
 
   document.addEventListener('click', (e) => {
     if (e.target.closest('.js-toast-close')) {

@@ -429,26 +429,26 @@
 
         <div class="row justify-center pt-60 md:pt-30">
           <div class="col-xl-6 col-lg-8 col-md-10">
-            <form method="post" action="{% url 'developments:contact' %}" class="contactForm js-lead-form">
-              {% csrf_token %}
+            <form method="post" action="{% url 'developments:lead_create' %}" class="contactForm js-lead-form">
+              {% include "includes/lead_form_hidden.html" %}
               <div class="contactForm__field">
                 <div class="contactForm__caption">Name</div>
-                <input type="text" name="name" maxlength="150" required>
+                {{ lead_form.name }}
               </div>
 
               <div class="contactForm__field mt-30">
                 <div class="contactForm__caption">phone</div>
-                <input type="tel" name="phone" maxlength="50">
+                {{ lead_form.phone }}
               </div>
 
               <div class="contactForm__field mt-30">
                 <div class="contactForm__caption">email</div>
-                <input type="email" name="email" required>
+                {{ lead_form.email }}
               </div>
 
               <div class="contactForm__field mt-30">
                 <div class="contactForm__caption">Your message</div>
-                <textarea name="message" rows="3"></textarea>
+                {{ lead_form.message }}
               </div>
 
               <div class="mt-30">

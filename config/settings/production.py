@@ -88,7 +88,7 @@ STORAGES = {
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL",
-    default="adhomes <noreply@adhomeshelder.com>",
+    default='"A.D Homeshelter" <info@adhomeshelder.com>',
 )
 # Re-format so display names containing a period (e.g. "A.D Homeshelter") get
 # quoted as email requires; otherwise Django rejects the address.
